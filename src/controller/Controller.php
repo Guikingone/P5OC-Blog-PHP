@@ -3,9 +3,17 @@
 namespace Lib\controller;
 
 use Lib\controller\core\ControllerTrait;
+// Add the ArticleManager namespace here.
 
 class Controller extends ControllerTrait
 {
+	private $manager;
+	
+	public function __construct(ArticleManager $manager)
+	{
+		$this->manager = $manager;
+	}
+	
 	public function indexAction()
 	{
 		echo $this->getTwig()->render('index.html.twig');
@@ -13,7 +21,11 @@ class Controller extends ControllerTrait
 
 	public function articlesAction()
 	{
-		echo $this->getTwig()->render('articles.html.twig');
+		$articles = $this->manager->getArticles()
+			
+		echo $this->getTwig()->render('articles.html.twig', [
+		    'articles' => $articles
+		]);
 	}
 
 	public function articleDetailAction()
