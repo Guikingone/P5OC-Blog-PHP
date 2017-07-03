@@ -8,15 +8,9 @@ class ArticleManager
 {
 	private $db;
 
-	public function __construct()
+	public function __construct(DBFactory $db)
 	{
-		$this->loadDBFactory();
-		$this->db = new DBFactory();
-	}
-	
-	public function loadDBFactory()
-	{
-		$this->db = require __DIR__.'./../../etc/DBFactory.php';
+		$this->db = $db;
 	}
 	
 	public function ajouterArticle(Article $article)
